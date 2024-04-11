@@ -9,21 +9,18 @@ document.addEventListener('DOMContentLoaded', () => {
         //  fetches movie data from a file named 'db.json'.
         fetch('db.json')
             .then(res => {
-                // This checks if the fetch operation was successful.
                 if (!res.ok) {
                     throw new Error('Error fetching movies from db.json');
                 }
-                //convert the response to JSON format.
+                
                 return res.json();
             })
             .then(data => {
-                //  store the movie data in the 'movieData' array.
                 movieData = data.films;
-                // call the 'displayMovies' function to show the movies on the webpage.
+                // call the 'displayMovies' function which shows the movies on the webpage.
                 displayMovies();
             })
             .catch(error => {
-                // If there's an error fetching the data, console.log the error and show an error message on the webpage.
                 console.error('Error fetching movies from db.json:', error);
                 showErrorMessage('Error loading movie data');
             });
@@ -34,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         movieData.forEach(movie => {
           
             const li = createMovieListItem(movie);
-            // Append the list item to the 'movieList' element on the webpage.
+            // Append the  items to the movieList element on the webpage.
             movieList.appendChild(li);
         });
     }
@@ -46,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         li.textContent = movie.title;
         li.dataset.movieId = movie.id;
         li.classList.add('film', 'item');
-        // Add a click event listener to the list item to show details about the movie when clicked.
+        // Add  click event listener to the list item to show details about the movies
         li.addEventListener('click', () => updateMovieDetails(movie.id));
         return li;
     }
@@ -75,17 +72,17 @@ document.addEventListener('DOMContentLoaded', () => {
     function buyTicket(movie) {
        
         movie.tickets_sold++;
-        // Update the ticket count display on the webpage.
+        // Update and impliments ticket count display on the webpage.
         updateTicketCount(movie.id);
         updateMovieDetails(movie.id);
     }
 
     function updateTicketCount(movieId) {
-        // This function updates the displayed number of available tickets for a movie.
+        //  updates the displayed number of available tickets for a movie.
         const movie = movieData.find(m => m.id === movieId);
-        // Calculate the number of available tickets for the movie.
+        // Calculate  number of the available tickets for the movie.
         const availableTickets = movie.capacity - movie.tickets_sold;
-        // Update the ticket count display on the webpage.
+        // Update  ticket count display on the webpage.
         document.getElementById('ticket-num').textContent = availableTickets;
     }
 
