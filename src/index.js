@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch('db.json')
             .then(res => {
                 if (!res.ok) {
-                    throw new Error('Error fetching movies from db.json');
+                    throw new Error('error fetching movies at db.json');
                 }
                 
                 return res.json();
@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 displayMovies();
             })
             .catch(error => {
-                console.error('Error fetching movies from db.json:', error);
-                showErrorMessage('Error loading movie data');
+                console.error('error fetching movies at db.json:', error);
+                showErrorMessage('error loading movies');
             });
     }
 
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         li.textContent = movie.title;
         li.dataset.movieId = movie.id;
-        li.classList.add('film', 'item');
+        li.classList.add('item','film');
         // Add  click event listener to the list item to show details about the movies
         li.addEventListener('click', () => updateMovieDetails(movie.id));
         return li;
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // display an error message on the webpage.
         const errorMessage = document.createElement('div');
         errorMessage.textContent = message;
-        errorMessage.classList.add('ui', 'negative', 'message');
+        errorMessage.classList.add('ui', 'message', 'negative');
         document.body.appendChild(errorMessage);
         // Set a timeout to remove the error message after 5 seconds.
         setTimeout(() => errorMessage.remove(), 5000);
